@@ -6,29 +6,62 @@
  * User Manual available at https://docs.gradle.org/6.1/userguide/tutorial_java_projects.html
  */
 
+buildscript {
+    ext {
+        springBootVersion="2.1.0.RELEASE"
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "org.owasp:dependency-check-gradle:5.0.0-M2"
+    }
+}
+
 plugins {
-    // Apply the java plugin to add support for Java
     id 'java'
     id 'idea'
-    // Apply the application plugin to add support for building a CLI application.
     id 'application'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+compileJava {
+    options.incremental = true
+    options.fork = true
+    options.failOnError = false
+}
+
 repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
 
 dependencies {
-    // This dependency is used by the application.
     implementation 'com.google.guava:guava:28.1-jre'
-
-    // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
 
 application {
-    // Define the main class for the application.
     mainClassName = 'spring.boot.template.Application'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['${rootProject}/src/main/java']
+        }
+    }
+
+    test {
+        java {
+            srcDirs = ['${rootProject}/src/test/java']
+        }
+    }
 }
