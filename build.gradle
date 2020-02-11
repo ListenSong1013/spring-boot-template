@@ -1,8 +1,20 @@
+buildscript {
+    ext {
+        springBootVersion = "2.2.4.RELEASE"
+    }
+
+    repositories {
+        maven { url "https://maven.aliyun.com/repository/central" }
+    }
+}
+
 plugins {
-    id 'java'
     id 'idea'
     id 'application'
+    id 'org.springframework.boot' version "${springBootVersion}"
 }
+
+apply plugin: 'io.spring.dependency-management'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -40,6 +52,9 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    implementation 'org.springframework.boot:spring-boot-starter-web' exclude module: "spring-boot-starter-tomcat"
     testImplementation 'junit:junit:4.12'
 }
 
