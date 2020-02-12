@@ -26,10 +26,20 @@ jobs:
         run: docker build -t ${{ secrets.DOCKERHUB_IMAGE }} .
       - name: Docker push
         run: docker push ${{ secrets.DOCKERHUB_IMAGE }}
-      - name: executing remote ssh commands using password
+      - name: Execute SSH commmands on remote server
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: 'ubuntu@212.64.41.111'
+          privateKey: ${{ secrets.TENCENT_CLOUD_SSHKEY }}
+          command: |
+            ls -lah
+            whoami
+      - name: executing remote ssh commands using key
         uses: appleboy/ssh-action@master
         with:
-          host: 212.64.41.111
-          username: ubuntu
+          host: '212.64.41.111'
+          username: 'ubuntu'
           key: ${{ secrets.TENCENT_CLOUD_SSHKEY }}
-          script: whoami
+          script: |
+            whoami
+            ls -al
