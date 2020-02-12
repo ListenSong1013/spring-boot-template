@@ -33,5 +33,5 @@ jobs:
           username: 'ubuntu'
           key: ${{ secrets.TENCENT_CLOUD_SSHKEY }}
           script: |
-            whoami
-            ls -al
+            docker pull docker push ${{ secrets.DOCKERHUB_IMAGE }}
+            ocker run -it -p 8001:8081 ${{ secrets.DOCKERHUB_IMAGE }}
