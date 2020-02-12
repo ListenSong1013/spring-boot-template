@@ -1,9 +1,4 @@
-# DOCKERHUB_IMAGE：打包的 docker 镜像地址
-# DOCKERHUB_LOGIN_USER：docker hun 用户名
-# DOCKERHUB_LOGIN_PASSWORD：docker hub 密码
-# TENCENT_CLOUD_SSHKEY：云服务器 ssh 秘钥
-
-name: Spring boot workflow
+name: Spring boot template CI
 
 on:
   push:
@@ -25,7 +20,6 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
-      - name:
       - name: Docker Login
         run: docker login -u ${{ secrets.DOCKERHUB_LOGIN_USER }} -p ${{ secrets.DOCKERHUB_LOGIN_PASSWORD }}
       - name: Docker build
