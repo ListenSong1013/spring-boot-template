@@ -31,5 +31,5 @@ jobs:
         with:
           host: 212.64.41.111
           username: ubuntu
-          key: ${{ secrets.TENCENT_CLOUD_KEY }}
+          key: ${{ secrets.TENCENT_CLOUD_SSHKEY }}
           script: whoami
