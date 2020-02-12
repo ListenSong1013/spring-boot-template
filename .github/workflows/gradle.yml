@@ -29,21 +29,23 @@ jobs:
       - name: init ssh, deploy
         run: |
           echo "${{secrets.TENCENT_CLOUD_SSHKEY}}"
+          echo "${{secrets.DOCKERHUB_IMAGE}}"
+          echo "${{secrets.DOCKERHUB_LOGIN_USER}}"
 
-#      - name: Execute SSH commmands on remote server
-#        uses: JimCronqvist/action-ssh@master
-#        with:
-#          hosts: 'ubuntu@212.64.41.111'
-#          privateKey: ${{ secrets.TENCENT_CLOUD_SSHKEY }}
-#          command: |
-#            ls -lah
-#            whoami
-#      - name: executing remote ssh commands using key
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: '212.64.41.111'
-#          username: 'ubuntu'
-#          key: ${{ secrets.TENCENT_CLOUD_SSHKEY }}
-#          script: |
-#            whoami
-#            ls -al
+      - name: Execute SSH commmands on remote server
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: 'ubuntu@212.64.41.111'
+          privateKey: ${{ secrets.TENCENT_CLOUD_SSHKEY }}
+          command: |
+            ls -lah
+            whoami
+      - name: executing remote ssh commands using key
+        uses: appleboy/ssh-action@master
+        with:
+          host: '212.64.41.111'
+          username: 'ubuntu'
+          key: ${{ secrets.TENCENT_CLOUD_SSHKEY }}
+          script: |
+            whoami
+            ls -al
