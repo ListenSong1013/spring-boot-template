@@ -29,7 +29,7 @@ jobs:
       - name: Docker flow
         run: |
         docker login -u ${{ secrets.DOCKERHUB_LOGIN_USER }} -p ${{ secrets.DOCKERHUB_LOGIN_PASSWORD }}
-        docker build -t ${{ secrets.DOCKERHUB_IMAGE }} .
+        docker build -t ${{ secrets.DOCKERHUB_IMAGE }} . |
         docker push ${{ secrets.DOCKERHUB_IMAGE }}
       - name: deploy service on remote server
         uses: appleboy/ssh-action@master
