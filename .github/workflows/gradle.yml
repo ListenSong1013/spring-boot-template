@@ -21,8 +21,8 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - name: Docker Login
-          run: docker login -u ${{ secrets.DOCKERHUB_LOGIN_USER }} -p ${{ secrets.DOCKERHUB_LOGIN_PASSWORD }}
+        run: docker login -u ${{ secrets.DOCKERHUB_LOGIN_USER }} -p ${{ secrets.DOCKERHUB_LOGIN_PASSWORD }}
       - name: Docker build
-          run: docker build -t ${{ secrets.DOCKERHUB_IMAGE }}
+        run: docker build -t ${{ secrets.DOCKERHUB_IMAGE }}
       - name: Docker push
-          run: docker push ${{ secrets.DOCKERHUB_IMAGE }}
+        run: docker push ${{ secrets.DOCKERHUB_IMAGE }}
